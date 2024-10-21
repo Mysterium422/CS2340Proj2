@@ -123,6 +123,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SPOTIFY_WEP_API_KEY = os.getenv('GOOGLE_MAPS_API_KEY')
+SPOTIFY_WEP_API_KEY = os.getenv('SPOTIFY_WEP_API_KEY')
 if not SPOTIFY_WEP_API_KEY:
     raise ValueError("SPOTIFY_WEP_API_KEY not set in environment")
