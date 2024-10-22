@@ -1,0 +1,18 @@
+{% load static %}
+{% block content %}
+<div class="signup-container">
+    <h2>Sign up</h2>
+    <a href="/maps/" class="back-arrow">
+        &#8592; Return <!-- This is a Unicode arrow symbol -->
+    </a>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sign Up</button>
+    </form>
+    <p class="login-prompt">
+        Already have an account? <a href="{% url 'login' %}">Log in</a>
+    </p>
+</div>
+{% endblock %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">

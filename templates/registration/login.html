@@ -1,0 +1,16 @@
+{% load static %}
+{% block content %}
+<div class="login-container">
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Log In</button>
+    </form>
+    <a href="{% url 'password_reset' %}" class="forgot-password">Forgot your password?</a>
+    <p class="signup-prompt">
+        Don't have an account? <a href="{% url 'signup' %}">Create one</a>
+    </p>
+</div>
+{% endblock %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">

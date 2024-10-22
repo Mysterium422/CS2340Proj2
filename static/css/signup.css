@@ -1,0 +1,101 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Container for the signup form */
+.signup-container {
+    background-color: white;
+    padding: 40px;
+    padding-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 600px;
+}
+
+/* Form heading */
+.signup-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form field styling */
+.signup-container form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Button styling */
+.signup-container form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.signup-container form button:hover {
+    background-color: #0056b3;
+}
+
+/* Error message styling */
+.signup-container .errorlist {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+/* Label styling */
+.signup-container form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #555;
+}
+
+.back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.back-arrow:hover {
+    color: #0056b3;
+}
+
+.login-prompt {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.login-prompt a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-prompt a:hover {
+    text-decoration: underline;
+}
