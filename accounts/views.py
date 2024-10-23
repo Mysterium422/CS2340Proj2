@@ -4,14 +4,16 @@ from django.shortcuts import redirect
 from django.utils import timezone
 import datetime
 import requests
-
 from .models import SpotifyToken
 # Create your views here.
+from django.dispatch import receiver
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.conf import settings
 from accounts.forms import CustomUserCreationForm
+from django.contrib.auth.signals import user_logged_in
+
 from urllib.parse import urlencode
 spotify_api_key = settings.SPOTIFY_WEB_API_KEY
 spotify_redirect_uri = settings.SPOTIFY_REDIRECT_URI
@@ -79,30 +81,30 @@ def spotify_callback(request):
     # Redirect to home or a dashboard
     return redirect('home')
 
-def login_view(request):
-    # Regular Django login
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        
-        if user is not None:
-            login(request, user)
-
-            # Check if Spotify tokens are already stored for the user
-            try:
-                token = SpotifyToken.objects.get(user=user)
-                if token.expires_in < datetime.datetime.now():
-                    refresh_spotify_token(user)
-                    pass
-            except SpotifyToken.DoesNotExist:
-                # No token found, redirect to Spotify OAuth
-                return redirect('spotify_login')
-            
-            return redirect('home')
-
-    return render(request, 'registration/login.html')
-
+@receiver(user_logged_in)
+def link_spotify_on_login(sender, request, user, **kwargs):
+    """
+    Automatically check if Spotify tokens are present and link the Spotify account after login.
+    """
+    try:
+        # Check if Spotify tokens already exist for this user
+        token = SpotifyToken.objects.get(user=user)
+        print("Spotify tokens found for user:", user.username);
+        if token.expires_in < timezone.now():
+            # Refresh the Spotify token if it's expired
+            refresh_spotify_token(user)
+    except SpotifyToken.DoesNotExist:
+        # If no Spotify token is found, redirect the user to the Spotify OAuth flow
+        params = {
+            'client_id': spotify_api_key,
+            'response_type': 'code',
+            'redirect_uri': spotify_redirect_uri,
+            'scope': SPOTIFY_SCOPES,
+            'show_dialog': 'true',
+        }
+        spotify_auth_url = 'https://accounts.spotify.com/authorize?' + urlencode(params)
+        return redirect(spotify_auth_url)
+    
 def refresh_spotify_token(user):
     try:
         token = SpotifyToken.objects.get(user=user)
