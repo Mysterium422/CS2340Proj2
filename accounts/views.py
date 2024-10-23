@@ -126,3 +126,6 @@ def refresh_spotify_token(user):
     except SpotifyToken.DoesNotExist:
         # Handle case where no token exists
         pass
+
+def redirect_to_home(request):
+    return redirect('/home/')
