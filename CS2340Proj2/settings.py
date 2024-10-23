@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+from decouple import config
 from pathlib import Path
 import os
 
@@ -136,6 +136,8 @@ DJANGO_ICONS = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SPOTIFY_WEB_API_KEY = os.getenv('SPOTIFY_WEB_API_KEY')
+SPOTIFY_WEB_API_KEY = config('SPOTIFY_WEB_API_KEY')
+SPOTIFY_REDIRECT_URI = config('SPOTIFY_REDIRECT_URI')
+SPOTIFY_CLIENT_SECRET = config('SPOTIFY_CLIENT_SECRET')
 # if not SPOTIFY_WEB_API_KEY:
 #     raise ValueError("SPOTIFY_WEB_API_KEY not set in environment")
