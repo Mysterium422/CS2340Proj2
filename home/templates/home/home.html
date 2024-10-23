@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header with Spotify Logo and Logout Icon -->
+        <header class="header">
+            <img src="{% static 'images/spotify_icon.png' %}" alt="Spotify Wrapped Icon" class="logo">
+            <a href="{% url 'logout' %}" class="logout-icon">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </header>
+
+        <!-- Create Wrap Button -->
+        <div class="create-wrap-section">
+            <button class="create-wrap-button">
+                <i class="fas fa-play play-icon"></i>
+                Create Wrap
+            </button>
+        </div>
+
+        <!-- Scrollable Previous Wraps Section -->
+        <div class="previous-wraps-section">
+            <h2>Previous Wraps...</h2>
+            <div class="wraps-container">
+                <!-- Example wraps, you can generate these dynamically -->
+                <div class="wrap-item"></div>
+                <div class="wrap-item"></div>
+                <div class="wrap-item"></div>
+                <div class="wrap-item"></div>
+                <div class="wrap-item"></div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

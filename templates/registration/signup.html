@@ -1,18 +1,33 @@
 {% load static %}
 {% block content %}
-<div class="signup-container">
-    <h2>Sign up</h2>
-    <a href="/maps/" class="back-arrow">
-        &#8592; Return <!-- This is a Unicode arrow symbol -->
-    </a>
+<div class="auth-container">
+     <img src="{% static 'images/spotify_icon.png' %}" alt="Spotify Wrapped Icon" class="logo">
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="input-group">
+            {{ form.username.label_tag }}<br>
+            {{ form.username }}
+        </div>
+
+        <div class="input-group">
+            {{ form.email.label_tag }}<br>
+            {{ form.email }}
+        </div>
+
+        <div class="input-group">
+            {{ form.password1.label_tag }}<br>
+            {{ form.password1 }}
+        </div>
+
+        <div class="input-group">
+            {{ form.password2.label_tag }}<br>
+            {{ form.password2 }}
+        </div>
         <button type="submit">Sign Up</button>
     </form>
-    <p class="login-prompt">
-        Already have an account? <a href="{% url 'login' %}">Log in</a>
+    <p class="auth-prompt">
+        <a href="{% url 'login' %}">Log in</a>
     </p>
 </div>
 {% endblock %}
-<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+<link rel="stylesheet" href="{% static 'css/account.css' %}">

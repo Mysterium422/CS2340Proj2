@@ -1,15 +1,17 @@
 {% load static %}
 {% block content %}
-<div class="login-container">
-    <h2>Login</h2>
+<div class="auth-container">
+    <img src="{% static 'images/spotify_icon.png' %}" alt="Spotify Wrapped Icon" class="logo">
+
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Log In</button>
+        <button type="submit" class="login-button">Login</button>
     </form>
-    <p class="signup-prompt">
-        Don't have an account? <a href="{% url 'signup' %}">Create one</a>
+
+    <p class="auth-prompt">
+        <a href="{% url 'signup' %}">Create Account</a>
     </p>
 </div>
 {% endblock %}
-<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" href="{% static 'css/account.css' %}">

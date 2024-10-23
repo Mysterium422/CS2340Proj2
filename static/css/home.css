@@ -1,0 +1,114 @@
+/* General Body Styling */
+body {
+    background: linear-gradient(135deg, #1DB954, #121212);
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for main content */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Header Styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+}
+
+.logo {
+    width: 80px;
+}
+
+.logout-icon img {
+    width: 100px;
+}
+
+/* Create Wrap Section */
+.create-wrap-section {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.create-wrap-button {
+    background-color: #1DB954;
+    color: black;
+    font-size: 24px;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.play-icon {
+    scale(2.0);
+}
+
+/* Previous Wraps Section */
+.previous-wraps-section {
+    width: 100%;
+    text-align: center;
+}
+
+.previous-wraps-section h2 {
+    margin-bottom: 20px;
+}
+
+.wraps-container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px;
+}
+
+.wrap-item {
+    background-color: #3b3bff; /* Placeholder color for wrap items */
+    width: 120px;
+    height: 150px;
+    border-radius: 5px;
+    flex-shrink: 0; /* Prevents items from shrinking */
+}
+
+/* Scrollbar styling for the wraps container */
+.wraps-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.wraps-container::-webkit-scrollbar-thumb {
+    background-color: #1DB954;
+    border-radius: 5px;
+}
+
+/* Mobile-Specific Styling */
+@media (max-width: 768px) {
+    /* Adjust play button for mobile */
+    .create-wrap-button {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .play-icon {
+        scale(10.0)
+    }
+
+    .create-wrap-button {
+        font-size: 28px;
+    }
+
+    /* Adjust wrap items for mobile */
+    .wrap-item {
+        width: 80px;
+        height: 100px;
+    }
+}

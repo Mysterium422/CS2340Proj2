@@ -10,6 +10,8 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
         help_texts = {
+            'username': None,
+            'password1': None,
             'password2': None,
         }
 
