@@ -141,3 +141,5 @@ SPOTIFY_REDIRECT_URI = config('SPOTIFY_REDIRECT_URI')
 SPOTIFY_CLIENT_SECRET = config('SPOTIFY_CLIENT_SECRET')
 # if not SPOTIFY_WEB_API_KEY:
 #     raise ValueError("SPOTIFY_WEB_API_KEY not set in environment")
+
+LOGOUT_REDIRECT_URL = "redirect-to-accounts"

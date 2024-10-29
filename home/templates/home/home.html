@@ -10,37 +10,41 @@
 </head>
 <body>
 
-    <div class="container">
-        <!-- Header with Spotify Logo and Logout Icon -->
-        <header class="header">
-            <img src="{% static 'images/spotify_icon.png' %}" alt="Spotify Wrapped Icon" class="logo">
-            <a href="{% url 'logout' %}" class="logout-icon">
-                <i class="fas fa-sign-out-alt"></i>
-            </a>
-        </header>
-
-        <!-- Create Wrap Button -->
-        <div class="create-wrap-section">
-            <button class="create-wrap-button">
-                <i class="fas fa-play play-icon"></i>
-                Create Wrap
+<div class="container">
+    <!-- Header with Spotify Logo and Logout Icon -->
+    <header class="header">
+        <img src="{% static 'images/spotify_icon.png' %}" alt="Spotify Wrapped Icon" class="logo">
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="logout-icon"><i class="fas fa-sign-out-alt"></i>
             </button>
-        </div>
+<!--            <a href="{% url 'logout' %}" class="logout-icon">-->
+<!--            </a>-->
+        </form>
+    </header>
 
-        <!-- Scrollable Previous Wraps Section -->
-        <div class="previous-wraps-section">
-            <h2>Previous Wraps...</h2>
-            <div class="wraps-container">
-                <!-- Example wraps, you can generate these dynamically -->
-                <div class="wrap-item"></div>
-                <div class="wrap-item"></div>
-                <div class="wrap-item"></div>
-                <div class="wrap-item"></div>
-                <div class="wrap-item"></div>
-            </div>
-        </div>
-
+    <!-- Create Wrap Button -->
+    <div class="create-wrap-section">
+        <button class="create-wrap-button">
+            <i class="fas fa-play play-icon"></i>
+            Create Wrap
+        </button>
     </div>
+
+    <!-- Scrollable Previous Wraps Section -->
+    <div class="previous-wraps-section">
+        <h2>Previous Wraps...</h2>
+        <div class="wraps-container">
+            <!-- Example wraps, you can generate these dynamically -->
+            <div class="wrap-item"></div>
+            <div class="wrap-item"></div>
+            <div class="wrap-item"></div>
+            <div class="wrap-item"></div>
+            <div class="wrap-item"></div>
+        </div>
+    </div>
+
+</div>
 
 </body>
 </html>
