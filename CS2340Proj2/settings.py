@@ -146,3 +146,4 @@ SPOTIFY_CLIENT_SECRET = config('SPOTIFY_CLIENT_SECRET')
 #     raise ValueError("SPOTIFY_WEB_API_KEY not set in environment")
 
 LOGOUT_REDIRECT_URL = "redirect-to-accounts"
+LOGIN_URL = '/accounts/login/'
