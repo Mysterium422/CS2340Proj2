@@ -35,6 +35,9 @@ body {
     width: 100px;
     height: auto;
     margin-bottom: 20px;
+    background:#000;
+    border-radius:20px;
+    padding:10px;
 }
 
 /* Form Styling for both login and signup */
@@ -103,4 +106,11 @@ h2 {
 
 .auth-prompt a:hover {
     text-decoration: underline;
+}
+
+/* Mobile-Specific Styling */
+@media (max-width: 768px) {
+    .auth-container{
+        scale: 3;
+    }
 }

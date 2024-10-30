@@ -27,6 +27,9 @@ form {
     width: 100px;
     height: auto;
     margin-bottom: 20px;
+    background:#000;
+    border-radius:20px;
+    padding:10px;
 }
 
 input[type="text"],
@@ -80,4 +83,11 @@ button[type="submit"]:hover {
 
 .login-prompt a:hover {
     text-decoration: underline;
+}
+
+/* Mobile-Specific Styling */
+@media (max-width: 768px) {
+    .auth-container{
+        scale: 3;
+    }
 }
