@@ -1,24 +1,31 @@
 /* General Body Styling */
-body {
-    background: linear-gradient(135deg, #1DB954, #121212);
-    color: white;
-    font-family: 'Roboto', sans-serif;
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1DB954, #121212);
+    color: white;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Container for main content */
+/* Container for main content, spaced between top, center, and bottom */
 .container {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    height: 100%;
     padding: 20px;
+    box-sizing: border-box;
 }
 
-/* Header Styling */
+/* Header at the top of the page */
 .header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     padding: 10px;
 }
@@ -27,57 +34,89 @@ body {
     width: 80px;
 }
 
-.logout-icon img {
-    width: 100px;
+/* Logout Button Styling */
+.logout-icon {
+    display: flex;
+    align-items: center;
+    background-color: #ff4d4d; /* Red background for logout button */
+    color: white;
+    font-size: 18px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    gap: 8px; /* Space between icon and text */
 }
 
-/* Create Wrap Section */
+.logout-icon i {
+    font-size: 1.2rem; /* Adjust icon size */
+}
+
+/* Hover effect for logout button */
+.logout-icon:hover {
+    background-color: #e63946; /* Darker red on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Centered Create Wrap Section */
 .create-wrap-section {
-    margin: 20px 0;
+    margin: auto 0; /* Centers it in the remaining vertical space */
     text-align: center;
 }
 
 .create-wrap-button {
     background-color: #1DB954;
-    color: black;
-    font-size: 24px;
-    padding: 10px 30px;
+    color: white;
+    font-size: 32px;
+    padding: 20px 50px;
     border: none;
     border-radius: 50px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease; /* Smooth scaling effect */
+    gap: 15px;
+}
+
+.create-wrap-button:hover {
+    transform: scale(1.05);
 }
 
 .play-icon {
-    scale(2.0);
+    font-size: 3rem;
 }
 
-/* Previous Wraps Section */
 .previous-wraps-section {
-    width: 100%;
     text-align: center;
+    width: 100%;
+    padding: 40px 20px;
 }
 
 .previous-wraps-section h2 {
+    font-size: 28px;
     margin-bottom: 20px;
 }
 
+/* Larger Wrap Items in the Scrollable Container */
 .wraps-container {
     display: flex;
-    gap: 10px;
+    gap: 20px;
     overflow-x: auto;
     scroll-behavior: smooth;
-    padding: 10px;
+    padding: 20px;
+    justify-content: center;
 }
 
 .wrap-item {
-    background-color: #3b3bff; /* Placeholder color for wrap items */
-    width: 120px;
-    height: 150px;
-    border-radius: 5px;
-    flex-shrink: 0; /* Prevents items from shrinking */
+    background-color: #3b3bff;
+    width: 150px;
+    height: 220px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Scrollbar styling for the wraps container */
@@ -95,20 +134,19 @@ body {
     /* Adjust play button for mobile */
     .create-wrap-button {
         flex-direction: column;
-        padding: 15px;
+        font-size: 32px;
+        padding: 50px 50px;
+        border-radius: 100px;
     }
 
     .play-icon {
-        scale(10.0)
+        font-size: 4rem;
     }
 
-    .create-wrap-button {
-        font-size: 28px;
-    }
 
-    /* Adjust wrap items for mobile */
+    /* Adjust wrap items for mobile
     .wrap-item {
         width: 80px;
         height: 100px;
-    }
+    } */
 }

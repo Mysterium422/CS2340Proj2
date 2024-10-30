@@ -4,24 +4,49 @@
      <img src="{% static 'images/spotify_icon.png' %}" alt="Spotify Wrapped Icon" class="logo">
     <form method="post">
         {% csrf_token %}
+        {% if form.non_field_errors %}
+            <div class="error-message">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
         <div class="input-group">
             {{ form.username.label_tag }}<br>
             {{ form.username }}
+            {% if form.username.errors %}
+                <div class="error-message">
+                    {{ form.username.errors.0 }}
+                </div>
+            {% endif %}
         </div>
 
         <div class="input-group">
             {{ form.email.label_tag }}<br>
             {{ form.email }}
+            {% if form.email.errors %}
+                <div class="error-message">
+                    {{ form.email.errors.0 }}
+                </div>
+            {% endif %}
         </div>
 
         <div class="input-group">
             {{ form.password1.label_tag }}<br>
             {{ form.password1 }}
+            {% if form.password1.errors %}
+                <div class="error-message">
+                    {{ form.password1.errors.0 }}
+                </div>
+            {% endif %}
         </div>
 
         <div class="input-group">
             {{ form.password2.label_tag }}<br>
             {{ form.password2 }}
+            {% if form.password2.errors %}
+                <div class="error-message">
+                    {{ form.password2.errors.0 }}
+                </div>
+            {% endif %}
         </div>
         <button type="submit">Sign Up</button>
     </form>
