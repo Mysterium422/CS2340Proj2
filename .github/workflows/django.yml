@@ -27,4 +27,5 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test
+        coverage run --source=accounts,home manage.py test
+        coverage report | grep TOTAL | awk '{if ($4 < 80) exit 1}'
