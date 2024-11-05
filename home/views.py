@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
+from accounts.models import SpotifyToken
 
 # Create your views here.
 def redirect_to_account(request):
@@ -12,4 +13,6 @@ def index(request):
         return redirect(settings.LOGIN_URL)
     
     # Render the home page if the user is logged in
+    print(SpotifyToken.objects.get(user=request.user).access_token)
+    print("hi")
     return render(request, "home/home.html", {})
