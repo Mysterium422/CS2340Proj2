@@ -1,7 +1,7 @@
 {% load static %}
 {% block content %}
 <div class="auth-container">
-     <img src="{% static 'images/spotify_icon.png' %}" alt="Spotify Wrapped Icon" class="logo">
+     <img style="" src="{% static 'images/spotify_icon.png' %}" alt="Spotify Wrapped Icon" class="logo">
     <form method="post">
         {% csrf_token %}
         {% if form.non_field_errors %}
