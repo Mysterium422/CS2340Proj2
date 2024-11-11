@@ -153,3 +153,23 @@ html, body {
         height: 100px;
     } */
 }
+
+.buttons-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between the buttons */
+}
+
+.delete-icon {
+    background-color: red;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.delete-icon:hover {
+    background-color: darkred;
+}
