@@ -3,6 +3,11 @@ from django.conf import settings
 
 # Create your views here.
 def redirect_to_account(request):
+    if request.user.is_authenticated:
+        # If the user is already logged in, redirect to the home page
+        return redirect('home')
+    # If the user is not logged in, redirect to the login page
+
     return redirect('/accounts/login')
 
 

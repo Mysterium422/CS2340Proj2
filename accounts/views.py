@@ -5,7 +5,6 @@ from django.utils import timezone
 import datetime
 import requests
 from .models import SpotifyToken
-# Create your views here.
 from django.dispatch import receiver
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
@@ -23,6 +22,11 @@ class SignUpView(CreateView):
     success_url = reverse_lazy("")
     template_name = "registration/signup.html"
 
+    def dispatch(self, request, *args, **kwargs):
+        # Redirect to home if the user is already logged in
+        if request.user.is_authenticated:
+            return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
     def form_valid(self, form):
         # Save the new user
         user = form.save()
