@@ -1,0 +1,78 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Prevents scrolling */
+}
+
+.slider-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.slider-wrapper {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 800%; /* Assumes 3 slides, adjust for more */
+}
+
+.slide {
+    flex: 0 0 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: white;
+}
+
+/* Arrow buttons for desktop */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 10;
+}
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+.arrow:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Mobile-specific styling for touch zones */
+@media (max-width: 768px) {
+    .arrow {
+        display: none; /* Hide arrows on mobile */
+    }
+
+    .touch-zone {
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        top: 0;
+        cursor: pointer;
+    }
+
+    .touch-zone.left {
+        left: 0;
+    }
+
+    .touch-zone.right {
+        right: 0;
+    }
+}
