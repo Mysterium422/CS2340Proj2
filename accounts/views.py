@@ -13,7 +13,7 @@ from django.views.generic import CreateView
 from django.conf import settings
 from accounts.forms import CustomUserCreationForm
 from django.contrib.auth.signals import user_logged_in
-from django.contrib.auth import logout
+
 from urllib.parse import urlencode
 spotify_api_key = settings.SPOTIFY_WEB_API_KEY
 spotify_redirect_uri = settings.SPOTIFY_REDIRECT_URI
@@ -129,10 +129,3 @@ def refresh_spotify_token(user):
 
 def redirect_to_home(request):
     return redirect('/home/')
-
-def delete_account(request):
-    if request.method == 'POST':
-        user = request.user
-        user.delete()  # Delete the user account
-        logout(request)  # Log out the user immediately after deletion
-        return redirect('home')  # Redirect to home page after account deletion

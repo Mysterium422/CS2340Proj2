@@ -14,7 +14,6 @@
     <!-- Header with Spotify Logo and Logout Icon -->
     <header class="header">
         <img src="{% static 'images/spotify_icon.png' %}" alt="Spotify Wrapped Icon" class="logo">
-        <div class="buttons-container">
         <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
             <button type="submit" class="logout-icon"><i class="fas fa-sign-out-alt"></i>
@@ -22,13 +21,6 @@
 <!--            <a href="{% url 'logout' %}" class="logout-icon">-->
 <!--            </a>-->
         </form>
-        <form action="{% url 'delete_account' %}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="delete-icon">
-                <i class="fas fa-trash-alt"></i> Delete Account
-            </button>
-        </form>
-    </div>
     </header>
 
     <!-- Create Wrap Button -->

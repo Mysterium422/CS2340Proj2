@@ -9,5 +9,4 @@ urlpatterns = [
     path('spotify/login/', spotify_login, name='spotify_login'),
     path('spotify/callback/', spotify_callback, name='spotify_callback'),
     path("profile/", views.redirect_to_home, name="redirect-to-home"),
-    path('delete_account/', views.delete_account, name='delete_account'),
 ]
