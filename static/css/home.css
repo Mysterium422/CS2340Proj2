@@ -49,7 +49,20 @@ html, body {
     transition: background-color 0.3s ease, transform 0.2s ease;
     gap: 8px; /* Space between icon and text */
 }
-
+.profile-icon {
+    display: flex;
+    align-items: center;
+    background-color: grey; /* Red background for logout button */
+    color: white;
+    font-size: 18px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    gap: 8px; /* Space between icon and text */
+}
 .logout-icon i {
     font-size: 1.2rem; /* Adjust icon size */
 }
