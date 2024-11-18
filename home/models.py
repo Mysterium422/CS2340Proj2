@@ -22,9 +22,8 @@ icon_href: href to the icon of the song
 """
 class Song(models.Model):
     name = models.CharField(max_length=128)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    artist_name = models.CharField(max_length=128)
     album = models.CharField(max_length=128)
-    genre = models.CharField(max_length=128)
     icon_href = models.CharField(max_length=128)
 
 """
@@ -39,8 +38,10 @@ class Wrapped(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
     top_songs = models.ManyToManyField(Song, through='TopSongRel', related_name='top_songs')
+    top_weekly_songs = models.ManyToManyField(Song, through='TopWeeklySongRel', related_name='top_weekly_songs')
     top_artists = models.ManyToManyField(Artist, through='TopArtistRel', related_name='top_artists')
-    reccomended_songs = models.ManyToManyField(Song, related_name='reccomended_songs')
+    top_weekly_artists = models.ManyToManyField(Artist, through='TopWeeklyArtistRel', related_name='top_weekly_artists')
+    recomended_songs = models.ManyToManyField(Song, related_name='recomended_songs')
 
 """
 Model for top song relation
@@ -54,12 +55,35 @@ class TopSongRel(models.Model):
     rank = models.IntegerField()
 
 """
+Model for top weekly song relation
+wrapped: foreign key to the wrapped that the song is in
+song: foreign key to the song
+rank: rank of the song in the wrapped
+"""
+class TopWeeklySongRel(models.Model):
+    wrapped = models.ForeignKey(Wrapped, on_delete=models.CASCADE)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+    rank = models.IntegerField()
+
+
+"""
 Model for top artist relation
 wrapped: foreign key to the wrapped that the artist is in
 song: foreign key to the artist
 rank: rank of the artist in the wrapped
 """
 class TopArtistRel(models.Model):
+    wrapped = models.ForeignKey(Wrapped, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    rank = models.IntegerField()
+
+"""
+Model for top weekly artist relation
+wrapped: foreign key to the wrapped that the artist is in
+song: foreign key to the artist
+rank: rank of the artist in the wrapped
+"""
+class TopWeeklyArtistRel(models.Model):
     wrapped = models.ForeignKey(Wrapped, on_delete=models.CASCADE)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     rank = models.IntegerField()
