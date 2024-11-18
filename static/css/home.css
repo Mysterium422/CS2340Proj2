@@ -32,6 +32,9 @@ html, body {
 
 .logo {
     width: 80px;
+    linear-gradient(#000, #444);
+    border-radius:20px;
+    padding:10px;
 }
 
 /* Logout Button Styling */
