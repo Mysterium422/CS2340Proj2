@@ -3,7 +3,7 @@ from django.http import JsonResponse
 
 from pydantic import BaseModel, Field
 from typing import List, Dict, Optional
-from models import Wrapped, Song, Artist, TopArtistRel, TopSongRel, TopWeeklyArtistRel, TopWeeklySongRel
+from .models import Wrapped, Song, Artist, TopArtistRel, TopSongRel, TopWeeklyArtistRel, TopWeeklySongRel
 from django.contrib.auth.models import User
 from datetime import date
 
@@ -81,7 +81,7 @@ class TrackObject(BaseModel):
    restrictions: Optional[Dict[str, str]] = Field(default=None)
    name: str
    popularity: int
-   preview_url: str # Nullable
+   preview_url: Optional[str] # Nullable
    track_number: int
    type: str
    uri: str
@@ -111,22 +111,22 @@ class SpotifyAPI:
         raise Exception(f"Error {response.status_code}: {response.text}")
 
   def get_top_artists_weekly(self, limit):
-    url = "https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=" + limit
+    url = "https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=" + str(limit)
     data = self.submit_request(url)
     return TopArtistsResponse.model_validate(data, strict=False)
   
   def get_top_artists_monthly(self, limit):
-    url = "https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=" + limit
+    url = "https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=" + str(limit)
     data = self.submit_request(url)
     return TopArtistsResponse.model_validate(data, strict=False)
   
   def get_top_artists_alltime(self, limit):
-    url = "https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=" + limit
+    url = "https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=" + str(limit)
     data = self.submit_request(url)
     return TopArtistsResponse.model_validate(data, strict=False)
   
   def get_top_tracks_weekly(self, limit):
-    url = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=" + limit
+    url = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=" + str(limit)
     data = self.submit_request(url)
     return TopTracksResponse.model_validate(data, strict=False)
   
@@ -136,7 +136,7 @@ class SpotifyAPI:
     return TopTracksResponse.model_validate(data, strict=False)
   
   def get_top_tracks_alltime(self, limit):
-    url = "https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=" + limit
+    url = "https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=" + str(limit)
     data = self.submit_request(url)
     return TopTracksResponse.model_validate(data, strict=False)
   
@@ -151,7 +151,7 @@ class SpotifyAPI:
 
 def createArtist(artist: ArtistObject) -> Artist:
    artist_images = artist.images
-   if len(artist_images > 0):
+   if (len(artist_images) > 0):
       return Artist.objects.create(name=artist.name, icon_href=artist.images[0].url)
    return Artist.objects.create(name=artist.name, icon_href="")
 
