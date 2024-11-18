@@ -111,40 +111,48 @@ class SpotifyAPI:
         raise Exception(f"Error {response.status_code}: {response.text}")
 
   def get_top_artists_weekly(self, limit):
+    limit = str(limit)
     url = "https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=" + limit
     data = self.submit_request(url)
     return TopArtistsResponse.model_validate(data, strict=False)
   
   def get_top_artists_monthly(self, limit):
+    limit = str(limit)
     url = "https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=" + limit
     data = self.submit_request(url)
     return TopArtistsResponse.model_validate(data, strict=False)
   
   def get_top_artists_alltime(self, limit):
+    limit = str(limit)
     url = "https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=" + limit
     data = self.submit_request(url)
     return TopArtistsResponse.model_validate(data, strict=False)
   
   def get_top_tracks_weekly(self, limit):
+    limit = str(limit)
     url = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=" + limit
     data = self.submit_request(url)
     return TopTracksResponse.model_validate(data, strict=False)
   
   def get_top_tracks_monthly(self, limit):
+    limit = str(limit)
     url = "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=" + limit
     data = self.submit_request(url)
     return TopTracksResponse.model_validate(data, strict=False)
   
   def get_top_tracks_alltime(self, limit):
+    limit = str(limit)
     url = "https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=" + limit
     data = self.submit_request(url)
     return TopTracksResponse.model_validate(data, strict=False)
   
   def get_recently_played(self):
+    limit = str(limit)
     url = "https://api.spotify.com/v1/me/player/recently-played"
     return self.submit_request(url)
   
   def get_recommendations(self, limit, seed_tracks):
+     limit = str(limit)
      url = f"https://api.spotify.com/v1/recommendations?seed_tracks={seed_tracks}&limit={limit}"
      data = self.submit_request(url)
      print(data)
