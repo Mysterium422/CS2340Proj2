@@ -4,3 +4,4 @@ djangorestframework
 django_icons
 requests
 coverage
+pydantic

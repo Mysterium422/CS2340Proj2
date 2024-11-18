@@ -147,6 +147,7 @@ class SpotifyAPI:
   def get_recommendations(self, limit, seed_tracks):
      url = f"https://api.spotify.com/v1/recommendations?seed_tracks={seed_tracks}&limit={limit}"
      data = self.submit_request(url)
+     print(data)
      return RecommendationsResponse.model_validate(data, strict=False)
 
 def createArtist(artist: ArtistObject) -> Artist:
@@ -227,25 +228,26 @@ def createWrapped(user: User, api: SpotifyAPI) -> Wrapped:
 
 
 def main():
-    def strip(s):
-        return "".join(c for c in s if ord(c) < 0xff)
+   import json 
 
+   def strip(s):
+       return "".join(c for c in s if ord(c) < 0xff)
    
-    p = SpotifyAPI("BQB-Zp2ETQ25le_FYD2JgSa6b4Aq8nx8hu1heNLIRcfTnx82KJXMIOVQPMfzjq2rR4U_PwPkFhugZLyFtPVz62XymKhrP7XUKRQGxUXB3TtgnOGak37WeVEHGH2TtHAeGoETvtb2meLmjwgNX4xGaPpVU5pa-q79EwOhrzmGoG-ceXQVeCn_JCpo2gozn9xnWN9owpunptpQlNeAocGuv41k6zM")
-    out = p.get_top_artists_monthly()
+   p = SpotifyAPI("BQDnAtI3U9fLwYq_HP1Y0T0pwjQKdcMtYR6hXykKDUBCU0_t4fC6Xy7yz_59Kwvs27hwjGnGIwyIp5H4CbypEkKlFDcd7-HfeDPnhPPsBT1SIPUqfwJ-R4LHflelp0gFtycaPuoK0vkj2zBDphUkMBSva8HlqHiLAfo1HI9yTEKJZGcI7wMhizNVSPZgV1X7k2TI1aDEtGqDDyOQwhIswtbF884")
 
-    print(out.items[0].name)
+   lifetime_songs_result = p.get_top_tracks_alltime('5').items
 
-   #  f = open("spotify_api_testlog5.txt", "w")
-   #  f.write(strip(str(out)))
+   seeds = []
 
-   #  f.write("\n")
+   for song in (lifetime_songs_result[:5]):
+      seeds.append(song.id)
+ 
+   out = p.get_recommendations('5', ",".join(seeds))
 
-   #  f.write(strip(str(out)))
+   f = open("test_resources/recommendations.json", "w")
+   json.dump(out.model_dump_json(), f)
 
-   #  f.close()
-
-   #  print(out.items[0].name)
+   f.close()
 
 if __name__ == "__main__":
     main()
