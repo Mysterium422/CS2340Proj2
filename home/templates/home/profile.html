@@ -14,9 +14,6 @@
     <!-- Header with Spotify Logo and Logout Icon -->
     <header class="header">
         <img src="{% static 'images/spotify_icon.png' %}" alt="Spotify Wrapped Icon" class="logo">
-        <a href="{% url 'profile' %}" style="justify-self: flex-end">
-            <button class="profile-icon">Profile</button>
-        </a>
         <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
             <button type="submit" class="logout-icon"><i class="fas fa-sign-out-alt"></i>
@@ -28,23 +25,14 @@
 
     <!-- Create Wrap Button -->
     <div class="create-wrap-section">
-        <button class="create-wrap-button">
-            <i class="fas fa-play play-icon"></i>
-            <b>Create Wrap</b>
-        </button>
-    </div>
-
-    <!-- Scrollable Previous Wraps Section -->
-    <div class="previous-wraps-section">
-        <h2>Previous Wraps...</h2>
-        <div class="wraps-container">
-            <!-- Example wraps, you can generate these dynamically -->
-            <div class="wrap-item"></div>
-            <div class="wrap-item"></div>
-            <div class="wrap-item"></div>
-            <div class="wrap-item"></div>
-            <div class="wrap-item"></div>
-        </div>
+        <h2>Profile Details:</h2>
+        <h3>Name: {{ username }}</h3>
+        <form action="{% url 'delete_user' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="logout-icon"><i class="fas fa-sign-out-alt"></i>
+                Delete Account
+            </button>
+        </form>
     </div>
 
 </div>

@@ -22,6 +22,7 @@ from home import views
 urlpatterns = [
     path("", views.redirect_to_account, name="redirect-to-accounts"),
     path("home/", include("home.urls")),
+    path("wrapped/", include("wrapped.urls")),
     path('admin/', admin.site.urls),
     path("accounts/", include("accounts.urls")),
     path("accounts/", include("django.contrib.auth.urls")),

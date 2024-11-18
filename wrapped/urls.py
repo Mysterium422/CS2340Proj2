@@ -16,12 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from home import views
+
+from wrapped import views
 
 urlpatterns = [
-    path("", views.index, name="home"),
-    path("profile/", views.profile, name="profile"),
-    path("profile/delete", views.delete, name="delete_user"),
-
-
+    path("", views.wrapped, name="wrapped"),
 ]

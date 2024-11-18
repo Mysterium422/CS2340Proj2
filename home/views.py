@@ -5,6 +5,11 @@ from accounts.views import refresh_spotify_token
 
 # Create your views here.
 def redirect_to_account(request):
+    if request.user.is_authenticated:
+        # If the user is already logged in, redirect to the home page
+        return redirect('home')
+    # If the user is not logged in, redirect to the login page
+
     return redirect('/accounts/login')
 
 
@@ -18,3 +23,23 @@ def index(request):
     print(SpotifyToken.objects.get(user=request.user).access_token)
     print(refresh_spotify_token(request.user))
     return render(request, "home/home.html", {})
+
+
+def profile(request):
+    if not request.user.is_authenticated:
+        # Redirect to the login page if the user is not logged in
+        return redirect(settings.LOGIN_URL)
+
+    # Render the home page if the user is logged in
+    return render(request, "home/profile.html", {"username": request.user.username})
+
+def delete(request):
+    if not request.user.is_authenticated:
+        # Redirect to the login page if the user is not logged in
+        return redirect(settings.LOGIN_URL)
+    try:
+        user = request.user
+        user.delete()
+    except Exception as e:
+        pass
+    return redirect("login")
