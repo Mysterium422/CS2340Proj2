@@ -38,7 +38,7 @@ class SignUpView(CreateView):
             login(self.request, user)  # Log in the user
         return redirect('spotify_login')
 #defined things to obtain from user
-SPOTIFY_SCOPES = 'user-top-read user-read-email'
+SPOTIFY_SCOPES = 'user-top-read user-read-email user-read-recently-played user-top-read'
 def spotify_login(request):
     params = {
         'client_id': spotify_api_key,
