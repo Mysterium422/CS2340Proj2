@@ -174,9 +174,8 @@ def createSong(song: TrackObject) -> Song:
 
    return Song.objects.create(name=name, artist_name=artist_name, album=album, icon_href=song_image)
 
-def createWrapped(user: User, access_token: str):
+def createWrapped(user: User, api: SpotifyAPI) -> Wrapped:
    wrapped = Wrapped.objects.create(user=user, date=date.today())
-   api = SpotifyAPI(access_token)
 
    lifetime_artists_result = api.get_top_artists_alltime(5).items
 
