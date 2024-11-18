@@ -7,6 +7,7 @@
     <title>Home</title>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 <body>
 
@@ -21,8 +22,6 @@
             {% csrf_token %}
             <button type="submit" class="logout-icon"><i class="fas fa-sign-out-alt"></i>
             </button>
-<!--            <a href="{% url 'logout' %}" class="logout-icon">-->
-<!--            </a>-->
         </form>
     </header>
 
@@ -33,6 +32,29 @@
             <b>Create Wrap</b>
         </button>
     </div>
+
+    <script>
+        document.querySelector(".create-wrap-button").addEventListener("click", () => {
+            fetch("{% url 'create_wrap' %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.wrapped_url) {
+                    // Open the wrapped URL in a new tab
+                    window.open(data.wrapped_url, '_blank');
+                } else {
+                    alert("Error creating Wrapped!");
+                }
+            })
+            .catch(error => {
+                alert("Error creating Wrapped!");
+            });
+        });
+        </script>
 
     <!-- Scrollable Previous Wraps Section -->
     <div class="previous-wraps-section">
@@ -48,6 +70,5 @@
     </div>
 
 </div>
-
 </body>
 </html>
