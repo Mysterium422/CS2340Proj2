@@ -13,6 +13,14 @@ def check_authenticated(request):
         return redirect(settings.LOGIN_URL)
     return None
 
+def redirect_to_account(request):
+    redirect_response = check_authenticated(request)
+    if redirect_response:
+        return redirect_response
+    
+    refresh_spotify_token(request.user)
+    return render(request, "home/home.html", {})
+
 def index(request):
     redirect_response = check_authenticated(request)
     if redirect_response:
@@ -27,7 +35,6 @@ def profile(request):
         return redirect_response
     
     return render(request, "home/profile.html", {"username": request.user.username})
-
 def delete(request):
     redirect_response = check_authenticated(request)
     if redirect_response:
@@ -39,6 +46,7 @@ def delete(request):
     except Exception as e:
         pass
     return redirect("login")
+
 
 
 def create_wrap_view(request):
