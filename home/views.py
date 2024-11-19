@@ -6,40 +6,33 @@ from django.utils.timezone import now
 from .spotify_api import SpotifyAPI, createWrapped
 from .models import Wrapped
 from django.http import JsonResponse
+from django.urls import reverse
 # Create your views here.
-def redirect_to_account(request):
-    if request.user.is_authenticated:
-        # If the user is already logged in, redirect to the home page
-        return redirect('home')
-    # If the user is not logged in, redirect to the login page
-
-    return redirect('/accounts/login')
-
+def check_authenticated(request):
+    if not request.user.is_authenticated:
+        return redirect(settings.LOGIN_URL)
+    return None
 
 def index(request):
-    if not request.user.is_authenticated:
-        # Redirect to the login page if the user is not logged in
-        return redirect(settings.LOGIN_URL)
+    redirect_response = check_authenticated(request)
+    if redirect_response:
+        return redirect_response
     
-    # Render the home page if the user is logged in
     refresh_spotify_token(request.user)
-    print(SpotifyToken.objects.get(user=request.user).access_token)
-    print(refresh_spotify_token(request.user))
     return render(request, "home/home.html", {})
 
-
 def profile(request):
-    if not request.user.is_authenticated:
-        # Redirect to the login page if the user is not logged in
-        return redirect(settings.LOGIN_URL)
-
-    # Render the home page if the user is logged in
+    redirect_response = check_authenticated(request)
+    if redirect_response:
+        return redirect_response
+    
     return render(request, "home/profile.html", {"username": request.user.username})
 
 def delete(request):
-    if not request.user.is_authenticated:
-        # Redirect to the login page if the user is not logged in
-        return redirect(settings.LOGIN_URL)
+    redirect_response = check_authenticated(request)
+    if redirect_response:
+        return redirect_response
+    
     try:
         user = request.user
         user.delete()
@@ -47,8 +40,6 @@ def delete(request):
         pass
     return redirect("login")
 
-
-from django.urls import reverse
 
 def create_wrap_view(request):
     try:
