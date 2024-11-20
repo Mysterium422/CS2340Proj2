@@ -46,6 +46,8 @@
                 if (data.wrapped_url) {
                     // Open the wrapped URL in a new tab
                     window.open(data.wrapped_url, '_blank');
+                    window.location.reload();
+
                 } else {
                     alert("Error creating Wrapped!");
                 }
