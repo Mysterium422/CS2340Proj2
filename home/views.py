@@ -5,8 +5,9 @@ from accounts.views import refresh_spotify_token
 from django.utils.timezone import now
 from .spotify_api import SpotifyAPI, createWrapped
 from .models import Wrapped
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseForbidden
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def check_authenticated(request):
     if not request.user.is_authenticated:
@@ -15,19 +16,23 @@ def check_authenticated(request):
 
 def redirect_to_account(request):
     redirect_response = check_authenticated(request)
+    wraps = Wrapped.objects.filter(user=request.user).order_by('-date')
     if redirect_response:
         return redirect_response
     
     refresh_spotify_token(request.user)
-    return render(request, "home/home.html", {})
+    print(len(wraps))
+    return render(request, "home/home.html", {'wraps': wraps})
 
 def index(request):
     redirect_response = check_authenticated(request)
+    wraps = Wrapped.objects.filter(user=request.user).order_by('-date')
     if redirect_response:
         return redirect_response
     
     refresh_spotify_token(request.user)
-    return render(request, "home/home.html", {})
+    print(len(wraps))
+    return render(request, "home/home.html", {'wraps': wraps})
 
 def profile(request):
     redirect_response = check_authenticated(request)
@@ -76,4 +81,25 @@ def create_wrap_view(request):
 def wrapped_detail_view(request, wrapped_id):
     # Retrieve the wrapped object using the wrapped_id
     wrapped = get_object_or_404(Wrapped, id=wrapped_id)
-    return render(request, 'wrapped/wrapped.html', {'wrapped': wrapped})
+    top_songs = wrapped.top_songs.through.objects.filter(wrapped=wrapped).order_by('rank')
+    top_weekly_songs = wrapped.top_weekly_songs.through.objects.filter(wrapped=wrapped).order_by('rank')
+    top_artists = wrapped.top_artists.through.objects.filter(wrapped=wrapped).order_by('rank')
+    top_weekly_artists = wrapped.top_weekly_artists.through.objects.filter(wrapped=wrapped).order_by('rank')
+
+    context = {
+        'wrapped': wrapped,
+        'top_songs': top_songs,
+        'top_weekly_songs': top_weekly_songs,
+        'top_artists': top_artists,
+        'top_weekly_artists': top_weekly_artists,
+        'recommended_songs': wrapped.recomended_songs.all(),
+    }
+    return render(request, 'home/wrapped.html', context)
+
+@login_required
+def delete_wrap(request, wrap_id):
+    if request.method == 'DELETE':
+        wrap = get_object_or_404(Wrapped, id=wrap_id, user=request.user)
+        wrap.delete()
+        return JsonResponse({'message': 'Wrap deleted successfully!'}, status=200)
+    return HttpResponseForbidden("You are not allowed to perform this action.")

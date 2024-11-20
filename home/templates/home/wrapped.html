@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollable Slides</title>
+    <link rel="stylesheet" href="{% static 'css/wrapped.css' %}">
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider-wrapper">
+            <div class="slide" style="background-color: red;">
+                <h2>Here is your weekly Spotify Wrapped for {{ wrapped.date }}</h2>
+            </div>
+            <div class="slide" style="background-color: green;">
+                <h2>Top Artists (Lifetime)</h2>
+                <ul>
+                    {% for artist_rel in wrapped.topartistrel_set.all|dictsort:"rank" %}
+                    {% if artist_rel.rank > 1 %}
+                    <li>
+                        Rank {{ artist_rel.rank }}: {{ artist_rel.artist.name }}
+                        <img src="{{ artist_rel.artist.icon_href }}" alt="Artist Icon" height="50px" width="50px">
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="slide" style="background-color: blue;">
+                {% with wrapped.topartistrel_set.all|dictsort:"rank" as sorted_artists %}
+                {% if sorted_artists|length > 0 %}
+                <h2>Top Artist (Lifetime)</h2>
+                {% with sorted_artists|first as top_artist %}
+                <p>
+                    Rank 1: {{ top_artist.artist.name }}
+                    <img src="{{ top_artist.artist.icon_href }}" alt="Artist Icon" height="100px" width="100px">
+                </p>
+                {% endwith %}
+                {% endif %}
+                {% endwith %}
+            </div>
+            <div class="slide" style="background-color: red;">
+                <h2>Top Artists (Weekly)</h2>
+                <ul>
+                    {% for artist_rel in wrapped.topweeklyartistrel_set.all|dictsort:"rank" %}
+                    <li>
+                        Rank {{ artist_rel.rank }}: {{ artist_rel.artist.name }}
+                        <img src="{{ artist_rel.artist.icon_href }}" alt="Artist Icon" height="50px" width="50px">
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="slide" style="background-color: green;">
+                <h2>Top Songs (Lifetime)</h2>
+                <ul>
+                    {% for song_rel in wrapped.topsongrel_set.all|dictsort:"rank" %}
+                    <li>
+                        Rank {{ song_rel.rank }}: {{ song_rel.song.name }} by {{ song_rel.song.artist_name }}
+                        <img src="{{ song_rel.song.icon_href }}" alt="Song Icon" height="50px" width="50px">
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="slide" style="background-color: blue;">
+                {% with wrapped.topweeklysongrel_set.all|dictsort:"rank" as sorted_weekly_songs %}
+                {% if sorted_weekly_songs|length > 0 %}
+                <h2>Top Song (Weekly)</h2>
+                {% with sorted_weekly_songs|first as top_weekly_song %}
+                <p>
+                    Rank 1: {{ top_weekly_song.song.name }} by {{ top_weekly_song.song.artist_name }}
+                    <img src="{{ top_weekly_song.song.icon_href }}" alt="Song Icon" height="100px" width="100px">
+                </p>
+                {% endwith %}
+                {% endif %}
+                {% endwith %}
+            </div>
+            <div class="slide" style="background-color: red;">
+                <h2>Recommended Songs</h2>
+                <ul>
+                    {% for song in wrapped.recomended_songs.all %}
+                    <li>
+                        {{ song.name }} by {{ song.artist_name }}
+                        <img src="{{ song.icon_href }}" alt="Song Icon" height="50px" width="50px">
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="slide" style="background-color: green;">
+                <h2>Have a great day!</h2>
+            </div>
+        </div>
+
+        <!-- Arrow buttons for desktop -->
+        <button class="arrow left-arrow">&#8592;</button>
+        <button class="arrow right-arrow">&#8594;</button>
+    </div>
+
+    <script src="{% static 'wrapped/wrapped.js' %}"></script>
+</body>
+</html>

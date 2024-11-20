@@ -60,15 +60,62 @@
     <div class="previous-wraps-section">
         <h2>Previous Wraps...</h2>
         <div class="wraps-container">
-            <!-- Example wraps, you can generate these dynamically -->
-            <div class="wrap-item"></div>
-            <div class="wrap-item"></div>
-            <div class="wrap-item"></div>
-            <div class="wrap-item"></div>
-            <div class="wrap-item"></div>
+        {% for wrapped in wraps %}
+        <div class="wrap-item">
+            <a href="/home/wrapped/{{ wrapped.id }}">
+                <p>{{ wrapped.date }}</p>
+            </a>
+            <button class="delete-wrap" data-id="{{ wrapped.id }}">
+                🗑️
+            </button>
+        </div>
+        {% endfor %}
         </div>
     </div>
 
+    
+
 </div>
+<script>
+    // Handle the delete button click
+    document.addEventListener('click', async (event) => {
+        if (event.target.classList.contains('delete-wrap')) {
+            const wrapId = event.target.dataset.id;
+
+            // Send DELETE request
+            const response = await fetch(`home/api/wraps/${wrapId}/`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'), // Include CSRF token
+                },
+            });
+
+            if (response.ok) {
+                // Remove the wrap item from the DOM
+                window.location.reload();
+            } else {
+                console.error('Failed to delete wrap:', response.statusText);
+            }
+
+
+        }
+    });
+
+    // Helper function to get the CSRF token
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === name + '=') {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
 </body>
 </html>

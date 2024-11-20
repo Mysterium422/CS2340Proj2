@@ -24,5 +24,5 @@ urlpatterns = [
     path("profile/delete", views.delete, name="delete_user"),
     path("create-wrap/", views.create_wrap_view, name="create_wrap"),
     path('wrapped/<int:wrapped_id>/', views.wrapped_detail_view, name='wrapped_detail'),
-
+    path('api/wraps/<int:wrap_id>/', views.delete_wrap, name='delete_wrap'),
 ]
