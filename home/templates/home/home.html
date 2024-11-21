@@ -53,27 +53,27 @@
                 }
             })
             .catch(error => {
-                alert("Error creating Wrapped!");
+                alert(error);
             });
         });
         </script>
 
     <!-- Scrollable Previous Wraps Section -->
     <div class="previous-wraps-section">
-        <h2>Previous Wraps...</h2>
-        <div class="wraps-container">
+    <h2>Previous Wraps...</h2>
+    <div class="wraps-container">
         {% for wrapped in wraps %}
         <div class="wrap-item">
-            <a href="/home/wrapped/{{ wrapped.id }}">
+            <a href="/home/wrapped/{{ wrapped.id }}" class="wrap-link">
                 <p>{{ wrapped.date }}</p>
             </a>
-            <button class="delete-wrap" data-id="{{ wrapped.id }}">
+            <button class="delete-wrap" data-id="{{ wrapped.id }}" aria-label="Delete Wrap">
                 🗑️
             </button>
         </div>
         {% endfor %}
-        </div>
     </div>
+</div>
 
     
 

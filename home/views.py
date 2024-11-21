@@ -53,6 +53,7 @@ def delete(request):
 
 
 def create_wrap_view(request):
+
     try:
         # Retrieve the user's Spotify token
         spotify_token = SpotifyToken.objects.get(user=request.user)
