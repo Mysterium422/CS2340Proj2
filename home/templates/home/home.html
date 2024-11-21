@@ -85,7 +85,7 @@
             const wrapId = event.target.dataset.id;
 
             // Send DELETE request
-            const response = await fetch(`home/api/wraps/${wrapId}/`, {
+            const response = await fetch(`api/wraps/${wrapId}/`, {
                 method: 'DELETE',
                 headers: {
                     'X-CSRFToken': getCookie('csrftoken'), // Include CSRF token
