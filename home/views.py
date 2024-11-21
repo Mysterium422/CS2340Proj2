@@ -16,20 +16,18 @@ def check_authenticated(request):
 
 def redirect_to_account(request):
     redirect_response = check_authenticated(request)
-    wraps = Wrapped.objects.filter(user=request.user).order_by('-date')
     if redirect_response:
         return redirect_response
-    
+    wraps = Wrapped.objects.filter(user=request.user).order_by('-date')
     refresh_spotify_token(request.user)
     print(len(wraps))
     return render(request, "home/home.html", {'wraps': wraps})
 
 def index(request):
     redirect_response = check_authenticated(request)
-    wraps = Wrapped.objects.filter(user=request.user).order_by('-date')
     if redirect_response:
         return redirect_response
-    
+    wraps = Wrapped.objects.filter(user=request.user).order_by('-date')
     refresh_spotify_token(request.user)
     print(len(wraps))
     return render(request, "home/home.html", {'wraps': wraps})
