@@ -55,7 +55,7 @@ body {
     font-weight: 600;
     margin-bottom: 20px;
     color: #ffffff;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .slide ul {
@@ -66,7 +66,7 @@ body {
     font-weight: 400;
     font-size: 1.2rem;
     color: #ffffff;
-    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
 }
 
 .slide li {
@@ -78,6 +78,55 @@ body {
     opacity: 0;
     animation: fadeInUp 0.6s ease-out forwards;
     animation-delay: calc(var(--index, 0) * 0.1s); /* Stagger animation */
+}
+
+/* Song Item Styling */
+.song-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+/* Song Icon Styling */
+.song-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0; /* Prevents the image from shrinking */
+}
+
+/* Song Details Styling */
+.song-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Song Title */
+.song-title {
+    font-size: 1.2rem; /* Slightly larger font for song title */
+    font-weight: bold;
+    align-self: baseline;
+}
+
+/* Artist Name */
+.artist-name-small {
+    font-size: 0.9rem; /* Smaller font for artist name */
+    color: rgba(255, 255, 255, 0.7); /* Dimmed white color */
+    margin-top: 3px;
+    align-self: baseline;
+}
+
+/* Rank Styling */
+.rank {
+    font-size: 1rem;
+    margin-left: auto; /* Aligns rank to the far right */
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .slide li:nth-child(1) { --index: 1; }
@@ -104,7 +153,7 @@ body {
 .song-title {
     font-weight: 600;
     color: #ff6a00;
-    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    background: linear-gradient(135deg, #ffaafc, #6affcb);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -152,13 +201,13 @@ body {
     font-size: 2rem;
     margin: 10px 0;
     color: #ffffff;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .top-item p {
     font-size: 4rem;
     color: #ffffff;
-    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
     line-height: 1.5;
     margin: 0;
 }
@@ -176,7 +225,7 @@ body {
     font-size: 24px;
     z-index: 10;
     border-radius: 50%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
     transition: background 0.3s;
 }
 

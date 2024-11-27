@@ -56,9 +56,13 @@
                 <h2>Top Songs (Lifetime)</h2>
                 <ul>
                     {% for song_rel in wrapped.topsongrel_set.all|dictsort:"rank" %}
-                    <li>
-                        {{ song_rel.rank }}: <span class="song-title">{{ song_rel.song.name }}</span> by <span class="artist-name">{{ song_rel.song.artist_name }}</span>
-                        <img src="{{ song_rel.song.icon_href }}" alt="Song Icon" height="50px" width="50px">
+                    <li class="song-item">
+                        <img src="{{ song_rel.song.icon_href }}" alt="Song Icon" class="song-icon">
+                        <div class="song-details">
+                            <span class="song-title">{{ song_rel.song.name }}</span>
+                            <span class="artist-name-small">{{ song_rel.song.artist_name }}</span>
+                        </div>
+                        <span class="rank">#{{ song_rel.rank }}</span>
                     </li>
                     {% endfor %}
                 </ul>
@@ -80,9 +84,12 @@
                 <h2>Recommended Songs</h2>
                 <ul>
                     {% for song in wrapped.recomended_songs.all %}
-                    <li>
-                        <span class="song-title">{{ song.name }}</span> by <span class="artist-name">{{ song.artist_name }}</span>
-                        <img src="{{ song.icon_href }}" alt="Song Icon" height="50px" width="50px">
+                    <li class="song-item">
+                        <img src="{{ song.icon_href }}" alt="Song Icon" class="song-icon">
+                        <div class="song-details">
+                            <span class="song-title">{{ song.name }}</span>
+                            <span class="artist-name-small">{{ song.artist_name }}</span>
+                        </div>
                     </li>
                     {% endfor %}
                 </ul>

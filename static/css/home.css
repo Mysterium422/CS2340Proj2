@@ -85,16 +85,23 @@ html, body {
 .create-wrap-button {
     background-color: #1DB954;
     color: white;
-    font-size: 32px;
+    font-size: 50px;
     padding: 20px 50px;
     border: none;
     border-radius: 50px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s ease; /* Smooth scaling effect */
     gap: 15px;
+}
+
+.profile-section {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    gap: 10px;
 }
 
 .create-wrap-button:hover {
@@ -119,11 +126,13 @@ html, body {
 /* Larger Wrap Items in the Scrollable Container */
 .wraps-container {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     overflow-x: auto;
     scroll-behavior: smooth;
     padding: 20px;
-    justify-content: center;
+    justify-content: left;
+    background: linear-gradient(90deg, #000000aa, #00000000);
+    border-radius: 20px;
 }
 
 /* Wrap Item */
