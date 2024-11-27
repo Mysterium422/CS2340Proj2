@@ -58,6 +58,16 @@ rightArrow.addEventListener('click', () => {
     }
 });
 
+let keysPressed = [0, 0]
+
+document.addEventListener('keydown', (event) => {
+    if (event.key == "ArrowLeft") {
+        leftArrow.click()
+    } else if (event.key == "ArrowRight") {
+        rightArrow.click()
+    }
+})
+
 // Mobile touch support
 let touchStartX = 0;
 
