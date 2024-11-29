@@ -9,8 +9,8 @@ name: name of the artist
 icon_href: href to the icon of the artist
 """
 class Artist(models.Model):
-    name = models.CharField(max_length=128)
-    icon_href = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, default="")
+    icon_href = models.CharField(max_length=128, default="")
 
 """
 Model for song to be used in wrapped
@@ -21,10 +21,10 @@ genre: genre of the song
 icon_href: href to the icon of the song
 """
 class Song(models.Model):
-    name = models.CharField(max_length=128)
-    artist_name = models.CharField(max_length=128)
-    album = models.CharField(max_length=128)
-    icon_href = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, default="")
+    artist_name = models.CharField(max_length=128, default="")
+    album = models.CharField(max_length=128, default="")
+    icon_href = models.CharField(max_length=128, default="")
 
 """
 Data for spotify wrapped
@@ -52,7 +52,7 @@ rank: rank of the song in the wrapped
 class TopSongRel(models.Model):
     wrapped = models.ForeignKey(Wrapped, on_delete=models.CASCADE)
     song = models.ForeignKey(Song, on_delete=models.CASCADE)
-    rank = models.IntegerField()
+    rank = models.IntegerField(default=-1)
 
 """
 Model for top weekly song relation
@@ -63,7 +63,7 @@ rank: rank of the song in the wrapped
 class TopWeeklySongRel(models.Model):
     wrapped = models.ForeignKey(Wrapped, on_delete=models.CASCADE)
     song = models.ForeignKey(Song, on_delete=models.CASCADE)
-    rank = models.IntegerField()
+    rank = models.IntegerField(default=-1)
 
 
 """
@@ -75,7 +75,7 @@ rank: rank of the artist in the wrapped
 class TopArtistRel(models.Model):
     wrapped = models.ForeignKey(Wrapped, on_delete=models.CASCADE)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
-    rank = models.IntegerField()
+    rank = models.IntegerField(default=-1)
 
 """
 Model for top weekly artist relation
@@ -86,4 +86,4 @@ rank: rank of the artist in the wrapped
 class TopWeeklyArtistRel(models.Model):
     wrapped = models.ForeignKey(Wrapped, on_delete=models.CASCADE)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
-    rank = models.IntegerField()
+    rank = models.IntegerField(default=-1)

@@ -11,3 +11,5 @@ omit =
     *_tests.py
     */site-packages/*
     */migrations/*
+    models.py
+    views.py

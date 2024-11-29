@@ -2,17 +2,17 @@ import requests
 from django.http import JsonResponse
 
 from typing import List, Dict, Optional
-from models import Wrapped, Song, Artist, TopArtistRel, TopSongRel, TopWeeklyArtistRel, TopWeeklySongRel
+from home.models import Wrapped, Song, Artist, TopArtistRel, TopSongRel, TopWeeklyArtistRel, TopWeeklySongRel
 from django.contrib.auth.models import User
 from datetime import date
-from spotify_api_pydantic import ArtistObject, TopArtistsResponse, TrackObject, TopTracksResponse, RecommendationsResponse
+from home.spotify_api_pydantic import ArtistObject, TopArtistsResponse, TrackObject, TopTracksResponse, RecommendationsResponse
 
 class SpotifyAPI:
 
   def __init__(self, key):
     self.key = key
     self.default_headers = {
-        "Authorization": "Bearer " + self.key
+        "Authorization": "Bearer " + str(self.key)
     }
 
   def submit_request(self, url):
@@ -74,7 +74,7 @@ class SpotifyAPI:
 
 def createArtist(artist: ArtistObject) -> Artist:
    artist_images = artist.images
-   if len(artist_images > 0):
+   if len(artist_images) > 0:
       return Artist.objects.create(name=artist.name, icon_href=artist.images[0].url)
    return Artist.objects.create(name=artist.name, icon_href="")
 
@@ -116,7 +116,7 @@ def createWrapped(user: User, api: SpotifyAPI) -> Wrapped:
       rank = i+1
       TopWeeklyArtistRel.objects.create(wrapped=wrapped, artist=artist, rank=rank)
    
-   weekly_songs_result = api.get_top_tracks_alltime(5).items
+   weekly_songs_result = api.get_top_tracks_weekly(5).items
    song_seeds = []
 
    for i in range(len(weekly_songs_result)):
