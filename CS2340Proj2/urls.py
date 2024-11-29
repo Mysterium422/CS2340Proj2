@@ -18,9 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
 
-from home import views
-
-def redirect_to_home(request):
+def redirect_to_home(_request):
+    """
+    Redirect to the home page
+    """
     return redirect("/home")
 
 urlpatterns = [
