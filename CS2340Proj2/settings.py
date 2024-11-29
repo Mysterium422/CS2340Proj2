@@ -153,5 +153,5 @@ except:
 # if not SPOTIFY_WEB_API_KEY:
 #     raise ValueError("SPOTIFY_WEB_API_KEY not set in environment")
 
-LOGOUT_REDIRECT_URL = "redirect-to-accounts"
+LOGOUT_REDIRECT_URL = "/accounts/login"
 LOGIN_URL = '/accounts/login/'

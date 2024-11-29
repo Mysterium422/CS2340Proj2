@@ -53,8 +53,11 @@ def spotify_login(request):
 
 def spotify_callback(request):
     code = request.GET.get('code')
-    
-    # Exchange the code for an access token and refresh token
+    tokens = exchange_code_for_tokens(code)
+    save_spotify_tokens(request.user, tokens)
+    return redirect('home')
+
+def exchange_code_for_tokens(code):
     response = requests.post('https://accounts.spotify.com/api/token', data={
         'grant_type': 'authorization_code',
         'code': code,
@@ -62,29 +65,23 @@ def spotify_callback(request):
         'client_id': spotify_api_key,
         'client_secret': spotify_client_secret
     })
-    
     response_data = response.json()
-    access_token = response_data.get('access_token')
-    refresh_token = response_data.get('refresh_token')
-    expires_in = response_data.get('expires_in')
-    
-    # Calculate when the access token will expire
-    expires_at = timezone.now() + datetime.timedelta(seconds=expires_in)
-    
-    # Save the tokens to the user's account
-    user = request.user
+    return {
+        'access_token': response_data.get('access_token'),
+        'refresh_token': response_data.get('refresh_token'),
+        'expires_in': response_data.get('expires_in')
+    }
+
+def save_spotify_tokens(user, tokens):
+    expires_at = timezone.now() + datetime.timedelta(seconds=tokens['expires_in'])
     SpotifyToken.objects.update_or_create(
         user=user,
         defaults={
-            'access_token': access_token,
-            'refresh_token': refresh_token,
+            'access_token': tokens['access_token'],
+            'refresh_token': tokens['refresh_token'],
             'expires_in': expires_at
         }
     )
-    
-    # Redirect to home or a dashboard
-    return redirect('home')
-
 @receiver(user_logged_in)
 def link_spotify_on_login(sender, request, user, **kwargs):
     """

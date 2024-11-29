@@ -7,6 +7,7 @@
     <title>Home</title>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 <body>
 
@@ -14,16 +15,17 @@
     <!-- Header with Spotify Logo and Logout Icon -->
     <header class="header">
         <img src="{% static 'images/spotify_icon.png' %}" alt="Spotify Wrapped Icon" class="logo">
-        <a href="{% url 'profile' %}" style="justify-self: flex-end">
-            <button class="profile-icon">Profile</button>
-        </a>
-        <form action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="logout-icon"><i class="fas fa-sign-out-alt"></i>
-            </button>
-<!--            <a href="{% url 'logout' %}" class="logout-icon">-->
-<!--            </a>-->
-        </form>
+        <div class="profile-section">
+            <a href="{% url 'profile' %}" style="">
+                <button class="profile-icon">Profile</button>
+            </a>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="logout-icon"><i class="fas fa-sign-out-alt"></i>
+                </button>
+            </form>
+        </div>
+
     </header>
 
     <!-- Create Wrap Button -->
@@ -34,20 +36,91 @@
         </button>
     </div>
 
+    <script>
+        document.querySelector(".create-wrap-button").addEventListener("click", () => {
+            fetch("{% url 'create_wrap' %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.wrapped_url) {
+                    // Open the wrapped URL in a new tab
+                    window.open(data.wrapped_url, '_blank');
+                    window.location.reload();
+
+                } else {
+                    alert("Error creating Wrapped!");
+                }
+            })
+            .catch(error => {
+                alert(error);
+            });
+        });
+        </script>
+
     <!-- Scrollable Previous Wraps Section -->
     <div class="previous-wraps-section">
-        <h2>Previous Wraps...</h2>
-        <div class="wraps-container">
-            <!-- Example wraps, you can generate these dynamically -->
-            <div class="wrap-item"></div>
-            <div class="wrap-item"></div>
-            <div class="wrap-item"></div>
-            <div class="wrap-item"></div>
-            <div class="wrap-item"></div>
+    <h2>Previous Wraps...</h2>
+    <div class="wraps-container">
+        {% for wrapped in wraps %}
+        <div class="wrap-item">
+            <a href="/home/wrapped/{{ wrapped.id }}" class="wrap-link">
+                <p>{{ wrapped.date }}</p>
+            </a>
+            <button class="delete-wrap" data-id="{{ wrapped.id }}" aria-label="Delete Wrap">
+                🗑️
+            </button>
         </div>
+        {% endfor %}
     </div>
-
 </div>
 
+    
+
+</div>
+<script>
+    // Handle the delete button click
+    document.addEventListener('click', async (event) => {
+        if (event.target.classList.contains('delete-wrap')) {
+            const wrapId = event.target.dataset.id;
+
+            // Send DELETE request
+            const response = await fetch(`api/wraps/${wrapId}/`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'), // Include CSRF token
+                },
+            });
+
+            if (response.ok) {
+                // Remove the wrap item from the DOM
+                window.location.reload();
+            } else {
+                console.error('Failed to delete wrap:', response.statusText);
+            }
+
+
+        }
+    });
+
+    // Helper function to get the CSRF token
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === name + '=') {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
 </body>
 </html>

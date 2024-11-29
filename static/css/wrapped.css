@@ -1,10 +1,14 @@
+/* Base reset */
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     overflow: hidden; /* Prevents scrolling */
+    background: linear-gradient(135deg, #f3f4f6, #ffffff);
+    color: #333;
 }
 
+/* Slider Container */
 .slider-container {
     position: relative;
     width: 100vw;
@@ -12,67 +16,294 @@ body {
     overflow: hidden;
 }
 
+/* Slider Wrapper */
 .slider-wrapper {
     display: flex;
     transition: transform 0.5s ease;
-    width: 800%; /* Assumes 3 slides, adjust for more */
+    width: calc(100vw * 8); /* Adjust for number of slides */
 }
 
+/* Individual Slide */
 .slide {
     flex: 0 0 100vw;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
-    color: white;
+    text-align: center;
+    color: #fff;
+    animation: gradientAnimation 60s infinite linear;
+     background: linear-gradient(135deg, #6a11cb, #2575fc, #ff6a00, #11ff88, #ee0979, #ff512f, #dd2476, #2575fc, #6a11cb);
+    background-size: 800% 800%; /* Larger area for smooth movement */
+    background-position: 0% 50%; /* Start position */
 }
 
-/* Arrow buttons for desktop */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Slide Content */
+.slide h2 {
+    font-size: 2.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.slide ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.slide li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    line-height: 1.5;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+    animation-delay: calc(var(--index, 0) * 0.1s); /* Stagger animation */
+}
+
+/* Song Item Styling */
+.song-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+/* Song Icon Styling */
+.song-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0; /* Prevents the image from shrinking */
+}
+
+/* Song Details Styling */
+.song-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Song Title */
+.song-title {
+    font-size: 1.2rem; /* Slightly larger font for song title */
+    font-weight: bold;
+    align-self: baseline;
+}
+
+/* Artist Name */
+.artist-name-small {
+    font-size: 0.9rem; /* Smaller font for artist name */
+    color: rgba(255, 255, 255, 0.7); /* Dimmed white color */
+    margin-top: 3px;
+    align-self: baseline;
+}
+
+/* Rank Styling */
+.rank {
+    font-size: 1rem;
+    margin-left: auto; /* Aligns rank to the far right */
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.slide li:nth-child(1) { --index: 1; }
+.slide li:nth-child(2) { --index: 2; }
+.slide li:nth-child(3) { --index: 3; }
+.slide li:nth-child(4) { --index: 4; }
+.slide li:nth-child(5) { --index: 5; }
+
+.slide img {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.slide p {
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    margin-top: 10px;
+    color: #ffffff;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+    line-height: 1.6;
+}
+
+.song-title {
+    font-weight: 600;
+    color: #ff6a00;
+    background: linear-gradient(135deg, #ffaafc, #6affcb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.slide li:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.artist-name {
+    font-weight: 400;
+    color: #ffffff;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.top-item {
+    display: flex;
+    flex-direction: column; /* Stack image and text vertically */
+    align-items: center; /* Center-align the content */
+    text-align: center; /* Center-align text */
+    margin-top: 20px;
+}
+
+.top-item img {
+    width: 200px; /* Bigger size for prominent display */
+    height: 200px; /* Ensure consistent aspect ratio */
+    border-radius: 50%; /* Optional: Circular image */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Add depth */
+    margin-bottom: 20px; /* Space between image and text */
+}
+
+.top-item h2 {
+    font-size: 2rem;
+    margin: 10px 0;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.top-item p {
+    font-size: 4rem;
+    color: #ffffff;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Arrow Buttons */
 .arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 15px 25px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 24px;
     z-index: 10;
-}
-
-.left-arrow {
-    left: 10px;
-}
-
-.right-arrow {
-    right: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    transition: background 0.3s;
 }
 
 .arrow:hover {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.9);
 }
 
-/* Mobile-specific styling for touch zones */
+.left-arrow {
+    left: 20px;
+}
+
+.right-arrow {
+    right: 20px;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.pop-in {
+    animation: popIn 0.5s ease-out;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #ffffff; /* Adjust to match your theme */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add depth */
+    transition: background 0.3s ease, transform 0.2s ease;
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+.close-button:hover {
+    background: rgba(0, 0, 0, 0.8); /* Darker on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.close-button:active {
+    transform: scale(0.9); /* Shrinks slightly when clicked */
+}
+
+/* Mobile-Specific Styling */
 @media (max-width: 768px) {
     .arrow {
-        display: none; /* Hide arrows on mobile */
+        display: none !important; /* Hide arrows on mobile */
     }
 
-    .touch-zone {
-        position: absolute;
-        width: 50%;
-        height: 100%;
-        top: 0;
-        cursor: pointer;
+    .slide h2 {
+        font-size: 2rem;
     }
 
-    .touch-zone.left {
-        left: 0;
+    .slide li {
+        font-size: 1.5rem;
     }
 
-    .touch-zone.right {
-        right: 0;
+    .top-item p {
+        font-size: 3rem;
     }
 }
