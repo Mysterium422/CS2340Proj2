@@ -5,7 +5,7 @@ Tests for the Spotify API
 from django.test import TestCase
 from django.contrib.auth.models import User
 
-from home.test.spotify_api_test import testSpotifyAPI
+from home.test.spotify_api_test import TestSpotifyAPI
 from home.spotify_api import create_wrapped
 # Create your tests here.
 
@@ -18,7 +18,7 @@ class SpotifyAPITests(TestCase):
         """
         Set up mock Spotify API
         """
-        self.spotify_api = testSpotifyAPI()
+        self.spotify_api = TestSpotifyAPI(key=None)
 
     def test_create_wrapped(self):
         """
