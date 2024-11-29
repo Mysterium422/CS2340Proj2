@@ -11,5 +11,8 @@ omit =
     *_tests.py
     */site-packages/*
     */migrations/*
+    */.conda/*
     models.py
     views.py
+    wsgi.py
+    asgi.py

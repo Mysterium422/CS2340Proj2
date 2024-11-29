@@ -9,9 +9,11 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-from decouple import config
+
 from pathlib import Path
-import os
+
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -148,7 +150,7 @@ try:
     SPOTIFY_WEB_API_KEY = config('SPOTIFY_WEB_API_KEY')
     SPOTIFY_REDIRECT_URI = config('SPOTIFY_REDIRECT_URI')
     SPOTIFY_CLIENT_SECRET = config('SPOTIFY_CLIENT_SECRET')
-except:
+except Exception:
     pass
 # if not SPOTIFY_WEB_API_KEY:
 #     raise ValueError("SPOTIFY_WEB_API_KEY not set in environment")
