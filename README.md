@@ -11,3 +11,4 @@ Spotify wrapped is an easy way to view fascinating statistics about your Spotify
 - Jacob Rainbow
 
 ## Website
+https://spotify-wrapped.up.railway.app/home/
