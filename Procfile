@@ -1,0 +1,1 @@
+web: gunicorn CS2340Proj2.wsgi

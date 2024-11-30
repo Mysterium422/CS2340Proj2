@@ -33,7 +33,6 @@ def redirect_to_account(request):
         return redirect_response
     wraps = Wrapped.objects.filter(user=request.user).order_by('-date')
     refresh_spotify_token(request.user)
-    print(len(wraps))
     return render(request, "home/home.html", {'wraps': wraps})
 
 def index(request):
@@ -45,7 +44,6 @@ def index(request):
         return redirect_response
     wraps = Wrapped.objects.filter(user=request.user).order_by('-date')
     refresh_spotify_token(request.user)
-    print(len(wraps))
     return render(request, "home/home.html", {'wraps': wraps})
 
 def profile(request):

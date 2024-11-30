@@ -1,0 +1,231 @@
+/* General Body Styling */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1DB954, #121212);
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container for main content, spaced between top, center, and bottom */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Header at the top of the page */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.logo {
+    width: 80px;
+    linear-gradient(#000, #444);
+    border-radius:20px;
+    padding:10px;
+}
+
+/* Logout Button Styling */
+.logout-icon {
+    display: flex;
+    align-items: center;
+    background-color: #ff4d4d; /* Red background for logout button */
+    color: white;
+    font-size: 18px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    gap: 8px; /* Space between icon and text */
+}
+.profile-icon {
+    display: flex;
+    align-items: center;
+    background-color: grey; /* Red background for logout button */
+    color: white;
+    font-size: 18px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    gap: 8px; /* Space between icon and text */
+}
+.logout-icon i {
+    font-size: 1.2rem; /* Adjust icon size */
+}
+
+/* Hover effect for logout button */
+.logout-icon:hover {
+    background-color: #e63946; /* Darker red on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Centered Create Wrap Section */
+.create-wrap-section {
+    margin: auto 0; /* Centers it in the remaining vertical space */
+    text-align: center;
+}
+
+.create-wrap-button {
+    background-color: #1DB954;
+    color: white;
+    font-size: 50px;
+    padding: 20px 50px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease; /* Smooth scaling effect */
+    gap: 15px;
+}
+
+.profile-section {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    gap: 10px;
+}
+
+.create-wrap-button:hover {
+    transform: scale(1.05);
+}
+
+.play-icon {
+    font-size: 3rem;
+}
+
+.previous-wraps-section {
+    text-align: center;
+    width: 100%;
+    padding: 40px 20px;
+}
+
+.previous-wraps-section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Larger Wrap Items in the Scrollable Container */
+.wraps-container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 20px;
+    justify-content: left;
+    background: linear-gradient(90deg, #000000aa, #00000000);
+    border-radius: 20px;
+}
+
+/* Wrap Item */
+.wrap-item {
+    position: relative;
+    background: linear-gradient(135deg, #6a11cb, #11ff88);
+    color: #ffffff;
+    width: 150px;
+    height: 220px;
+    border-radius: 15px;
+    flex-shrink: 0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wrap-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.wrap-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.2rem;
+    z-index: 1;
+}
+
+.delete-wrap {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4d4d;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    z-index: 2;
+}
+
+.delete-wrap:hover {
+    background-color: #e63946;
+    transform: scale(1.1);
+}
+
+.delete-wrap:active {
+    transform: scale(0.9);
+}
+
+/* Scrollbar styling for the wraps container */
+.wraps-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.wraps-container::-webkit-scrollbar-thumb {
+    background-color: #1DB954;
+    border-radius: 5px;
+}
+
+/* Mobile-Specific Styling */
+@media (max-width: 768px) {
+    /* Adjust play button for mobile */
+    .create-wrap-button {
+        flex-direction: column;
+        font-size: 32px;
+        padding: 50px 50px;
+        border-radius: 100px;
+    }
+
+    .play-icon {
+        font-size: 4rem;
+    }
+
+
+    /* Adjust wrap items for mobile
+    .wrap-item {
+        width: 80px;
+        height: 100px;
+    } */
+}
