@@ -36,6 +36,10 @@ ALLOWED_HOSTS = [
     'spotify-wrapped.up.railway.app'
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://spotify-wrapped.up.railway.app'
+]
+
 
 # Application definition
 
