@@ -143,3 +143,9 @@ GitHub.sublime-settings
 .history
 
 .conda/*
+
+# Allow migrations folder and its contents
+!migrations/
+!migrations/*.py
+!migrations/__pycache__/
+!migrations/__pycache__/*.pyc
