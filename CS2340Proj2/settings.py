@@ -30,7 +30,11 @@ SECRET_KEY = 'django-insecure-&r@hvc)_m6qkbb=npof1tmm0=^p7vtx9dnov&bm_6!(^@tnwf2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'spotify-wrapped.up.railway.app'
+]
 
 
 # Application definition
