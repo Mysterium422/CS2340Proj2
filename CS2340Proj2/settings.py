@@ -14,7 +14,7 @@ from pathlib import Path
 
 from decouple import config
 
-import os
+import os, dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -99,7 +99,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -158,6 +157,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SPOTIFY_WEB_API_KEY = ""
 SPOTIFY_REDIRECT_URI = ""
 SPOTIFY_CLIENT_SECRET = ""
+DATABASE_URL = ""
 
 try:
     SPOTIFY_WEB_API_KEY = config('SPOTIFY_WEB_API_KEY')
@@ -165,8 +165,19 @@ try:
     SPOTIFY_CLIENT_SECRET = config('SPOTIFY_CLIENT_SECRET')
 except Exception:
     pass
+
+try:
+    DATABASE_URL = config('DATABASE_URL')
+except Exception:
+    pass
 # if not SPOTIFY_WEB_API_KEY:
 #     raise ValueError("SPOTIFY_WEB_API_KEY not set in environment")
 
 LOGOUT_REDIRECT_URL = "/accounts/login"
 LOGIN_URL = '/accounts/login/'
+
+print(DATABASE_URL)
+if DATABASE_URL:
+    print("DB URL Detected!")
+    DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
+    print(DATABASES['default'])
