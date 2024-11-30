@@ -176,8 +176,7 @@ except Exception:
 LOGOUT_REDIRECT_URL = "/accounts/login"
 LOGIN_URL = '/accounts/login/'
 
-print(DATABASE_URL)
 if DATABASE_URL:
-    print("DB URL Detected!")
+    print("DB URL Found")
+    print(DATABASE_URL)
     DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
-    print(DATABASES['default'])
